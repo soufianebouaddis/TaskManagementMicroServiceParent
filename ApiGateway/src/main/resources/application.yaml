@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka : true
+    service-url:
+      defaultZone: ${EUREKA_SERVER-ADDRESS:http://register-server:8761/eureka}
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    discovery:
+      enabled: true
+    gateway:
+      default-filters:
+      - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+              allowedOrigins: "*"
+              allowedMethods: "*"
+              allowedHeaders: "*" 
